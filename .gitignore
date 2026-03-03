@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.ai/
+test-results/
+*.tsbuildinfo
+*.d.ts
+/src/**/*.js
+/vite.config.js
+/vitest.config.js
+/playwright.config.js

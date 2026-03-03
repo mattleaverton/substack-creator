@@ -1,0 +1,164 @@
+{
+  "session": {
+    "id": "session_demo_pg_001",
+    "name": "P&G Sustainability Newsletter Demo",
+    "createdAt": "2026-02-20T12:00:00.000Z",
+    "mode": "demo",
+    "events": [
+      {
+        "id": "event_demo_1",
+        "type": "state-transition",
+        "timestamp": "2026-02-20T12:00:01.000Z",
+        "payload": {
+          "step": "settings",
+          "prefill": "P&G brand and market context loaded"
+        }
+      },
+      {
+        "id": "event_demo_2",
+        "type": "state-transition",
+        "timestamp": "2026-02-20T12:00:05.000Z",
+        "payload": {
+          "step": "topic",
+          "prefill": "How P&G can build trust with sustainability proof points in 2026"
+        }
+      },
+      {
+        "id": "event_demo_3",
+        "type": "state-transition",
+        "timestamp": "2026-02-20T12:00:08.000Z",
+        "payload": {
+          "step": "research",
+          "highlightedAction": "Next"
+        }
+      },
+      {
+        "id": "event_demo_4",
+        "type": "state-transition",
+        "timestamp": "2026-02-20T12:00:12.000Z",
+        "payload": {
+          "step": "outline",
+          "highlightedAction": "Next"
+        }
+      },
+      {
+        "id": "event_demo_5",
+        "type": "state-transition",
+        "timestamp": "2026-02-20T12:00:18.000Z",
+        "payload": {
+          "step": "complete",
+          "highlightedAction": "Finish"
+        }
+      }
+    ],
+    "llmCache": [
+      {
+        "key": "new_post_research::Research reliable sources for this newsletter topic.\nTopic: How P&G can build trust with sustainability proof points in 2026\nSupplementary links: none\nReturn at least 5 sources with metadata and a concise snippet for each.",
+        "response": {
+          "sources": [
+            {
+              "url": "https://example.com/sustainability-packaging-2026",
+              "title": "Sustainability Packaging Momentum in 2026",
+              "author": "K. Morgan",
+              "publicationDate": "2026-02-10",
+              "snippet": "Brands that publish measurable packaging reductions are seeing stronger trust signals among repeat buyers."
+            },
+            {
+              "url": "https://example.com/consumer-proof-points",
+              "title": "Consumers Want Verifiable Proof Points",
+              "author": "L. Chang",
+              "publicationDate": "2026-01-28",
+              "snippet": "Survey data shows audiences respond better to evidence-backed claims than broad sustainability messaging."
+            },
+            {
+              "url": "https://example.com/retail-trust-reports",
+              "title": "Retail Trust Benchmarks Q1",
+              "author": "N. Reed",
+              "publicationDate": "2026-02-14",
+              "snippet": "Trust scores improve when brands share process details and third-party references in long-form channels."
+            }
+          ]
+        }
+      },
+      {
+        "key": "new_post_outline::Generate a one-shot outline for a Substack article.\nTopic: How P&G can build trust with sustainability proof points in 2026\nCompany context: Procter & Gamble is a consumer goods company operating across household and personal care categories with a global audience.\nVoice: Confident but practical, data-backed, and plainspoken with concrete examples.\nSources:\n- Sustainability Packaging Momentum in 2026: Brands that publish measurable packaging reductions are seeing stronger trust signals among repeat buyers.\n- Consumers Want Verifiable Proof Points: Survey data shows audiences respond better to evidence-backed claims than broad sustainability messaging.\n- Retail Trust Benchmarks Q1: Trust scores improve when brands share process details and third-party references in long-form channels.",
+        "response": {
+          "outline": "# Outline\n1. Why trust is now evidence-driven in consumer goods\n2. What proof points matter most to readers\n3. How to structure recurring proof updates in a newsletter\n4. Practical next-quarter actions for brand teams"
+        }
+      },
+      {
+        "key": "new_post_write_cycle_1::Write a complete Substack post in markdown.\nInclude inline citations like [1], [2] mapped to source IDs in citationMap.\nDo not include guardrails yet.\nTopic: How P&G can build trust with sustainability proof points in 2026\nOutline: # Outline\n1. Why trust is now evidence-driven in consumer goods\n2. What proof points matter most to readers\n3. How to structure recurring proof updates in a newsletter\n4. Practical next-quarter actions for brand teams\nSources: source_0|Sustainability Packaging Momentum in 2026|https://example.com/sustainability-packaging-2026\nsource_1|Consumers Want Verifiable Proof Points|https://example.com/consumer-proof-points\nsource_2|Retail Trust Benchmarks Q1|https://example.com/retail-trust-reports",
+        "response": {
+          "markdown": "# Evidence Builds Trust Faster Than Messaging\n\nTrust in consumer brands has shifted from narrative to verification. Readers now look for concrete, recurring proof of progress instead of one-time claims.[1]\n\nThe strongest pattern in current research is straightforward: when brands show measurable operational change, repeat audiences respond with higher confidence and stronger intent to stay engaged.[1][2]\n\nFor newsletter strategy, this means every edition should include one or two proof modules: a measurable metric, a short explanation of what changed, and a clear source reference readers can inspect.[2]\n\nA practical template for next quarter is simple. Publish one packaging metric each month, one supply chain update each month, and one independent benchmark comparison each quarter. This cadence balances transparency and readability.[3]\n\nTeams that keep this rhythm usually reduce skepticism because readers can track progress over time instead of decoding broad promises.[3]",
+          "citationMap": {
+            "1": "source_0",
+            "2": "source_1",
+            "3": "source_2"
+          }
+        }
+      },
+      {
+        "key": "new_post_write_cycle_2::Revise this markdown for style consistency and readability.\nVoice guidance: Confident but practical, data-backed, and plainspoken with concrete examples.\nKeep citations intact and best-effort for source-derived claims.\n# Evidence Builds Trust Faster Than Messaging\n\nTrust in consumer brands has shifted from narrative to verification. Readers now look for concrete, recurring proof of progress instead of one-time claims.[1]\n\nThe strongest pattern in current research is straightforward: when brands show measurable operational change, repeat audiences respond with higher confidence and stronger intent to stay engaged.[1][2]\n\nFor newsletter strategy, this means every edition should include one or two proof modules: a measurable metric, a short explanation of what changed, and a clear source reference readers can inspect.[2]\n\nA practical template for next quarter is simple. Publish one packaging metric each month, one supply chain update each month, and one independent benchmark comparison each quarter. This cadence balances transparency and readability.[3]\n\nTeams that keep this rhythm usually reduce skepticism because readers can track progress over time instead of decoding broad promises.[3]",
+        "response": {
+          "markdown": "# Trust Moves at the Speed of Proof\n\nReaders are not asking for louder sustainability claims. They are asking for clearer evidence. In current consumer research, measurable updates outperform broad narrative statements in building confidence.[1]\n\nThe implication for brand newsletters is practical: each issue should carry one concrete metric, one process update, and one source link that a reader can verify in seconds.[2]\n\nFor Q2 planning, keep a repeatable structure. Share packaging reduction progress monthly, include one operations proof point monthly, and publish one third-party benchmark comparison each quarter.[1][3]\n\nThis cadence creates a visible accountability loop. Over time, audiences see movement, not marketing language, and trust compounds.[3]",
+          "citationMap": {
+            "1": "source_0",
+            "2": "source_1",
+            "3": "source_2"
+          }
+        }
+      },
+      {
+        "key": "new_post_write_cycle_3::Apply guardrails to this markdown and fix any violations.\nOnly use the guardrails text and the post draft.\nGuardrails: Avoid unverifiable claims, avoid legal/medical advice, and keep language factual and audience-safe.\n# Trust Moves at the Speed of Proof\n\nReaders are not asking for louder sustainability claims. They are asking for clearer evidence. In current consumer research, measurable updates outperform broad narrative statements in building confidence.[1]\n\nThe implication for brand newsletters is practical: each issue should carry one concrete metric, one process update, and one source link that a reader can verify in seconds.[2]\n\nFor Q2 planning, keep a repeatable structure. Share packaging reduction progress monthly, include one operations proof point monthly, and publish one third-party benchmark comparison each quarter.[1][3]\n\nThis cadence creates a visible accountability loop. Over time, audiences see movement, not marketing language, and trust compounds.[3]",
+        "response": {
+          "markdown": "# Trust Moves at the Speed of Proof\n\nReaders are not asking for louder sustainability claims. They are asking for clearer evidence. Recent consumer research indicates that measurable updates can build confidence more effectively than broad narrative statements.[1]\n\nThe implication for brand newsletters is practical: each issue should carry one concrete metric, one process update, and one source link that a reader can verify quickly.[2]\n\nFor Q2 planning, keep a repeatable structure. Share packaging reduction progress monthly, include one operations proof point monthly, and publish one third-party benchmark comparison each quarter.[1][3]\n\nThis cadence creates a visible accountability loop. Over time, audiences can track movement instead of interpreting broad marketing language.[3]",
+          "citationMap": {
+            "1": "source_0",
+            "2": "source_1",
+            "3": "source_2"
+          }
+        }
+      }
+    ]
+  },
+  "configSeed": {
+    "apiKey": "demo-key-not-used",
+    "companyConfirmation": "Procter & Gamble is a consumer goods company operating across household and personal care categories with a global audience.",
+    "voiceConfirmation": "Confident but practical, data-backed, and plainspoken with concrete examples.",
+    "guardrailsConfirmation": "Avoid unverifiable claims, avoid legal/medical advice, and keep language factual and audience-safe."
+  },
+  "replayFrames": [
+    {
+      "step": "Settings",
+      "prefill": "Company profile, voice, and guardrails are auto-filled from recorded session cache.",
+      "highlightedAction": "Next"
+    },
+    {
+      "step": "Topic",
+      "prefill": "How P&G can build trust with sustainability proof points in 2026",
+      "attachments": [
+        {
+          "name": "p-and-g-context.txt",
+          "size": 2048,
+          "type": "text/plain"
+        }
+      ],
+      "highlightedAction": "Research"
+    },
+    {
+      "step": "Research",
+      "prefill": "Three source cards stream in with metadata and snippets.",
+      "highlightedAction": "Generate Outline"
+    },
+    {
+      "step": "Outline",
+      "prefill": "One-shot outline generated by Gemini 3.1 Pro.",
+      "highlightedAction": "Accept Outline"
+    },
+    {
+      "step": "Write",
+      "prefill": "Write, Edit, and Guardrails cycles complete automatically.",
+      "highlightedAction": "Finish"
+    }
+  ]
+}
