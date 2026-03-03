@@ -105,9 +105,6 @@ export const writeSchema: JsonSchema = {
   required: ["markdown", "citationMap"],
   properties: {
     markdown: { type: "string" },
-    citationMap: {
-      type: "object",
-      additionalProperties: { type: "string" },
-    },
+    citationMap: { type: "string" },
   },
 };

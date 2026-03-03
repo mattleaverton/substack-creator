@@ -53,9 +53,23 @@ interface OutlineResponse {
   outline: string;
 }
 
-interface WriteResponse {
+interface WriteResponseRaw {
+  markdown: string;
+  citationMap: string;
+}
+
+function parseWriteResponse(raw: WriteResponseRaw): {
   markdown: string;
   citationMap: Record<string, string>;
+} {
+  let map: Record<string, string> = {};
+  try {
+    map = JSON.parse(raw.citationMap);
+  } catch {
+    map = {};
+  }
+  const markdown = raw.markdown.replace(/\\n/g, "\n");
+  return { markdown, citationMap: map };
 }
 
 const STEP_ORDER: NewPostStep[] = [
@@ -315,20 +329,21 @@ export default function NewPost(): JSX.Element {
       setWriteCycle("write");
       const writePrompt = [
         "Write a complete Substack post in markdown.",
-        "Include inline citations like [1], [2] mapped to source IDs in citationMap.",
+        "Include inline citations like [1], [2]. Return citationMap as a JSON-encoded string mapping citation keys to source IDs, e.g. '{\"1\": \"source_0\", \"2\": \"source_1\"}'.",
         "Do not include guardrails yet.",
         `Topic: ${topic.text}`,
         `Outline: ${outline}`,
         `Sources: ${researchSources.map((source) => `${source.id}|${source.title}|${source.url}`).join("\n")}`,
       ].join("\n");
 
-      const writeResponse = await client.runJson<WriteResponse>({
+      const writeResponseRaw = await client.runJson<WriteResponseRaw>({
         prompt: writePrompt,
         schema: writeSchema,
         schemaName: "new_post_write_cycle_1",
         taskType: "important",
         maxRetries: 4,
       });
+      const writeResponse = parseWriteResponse(writeResponseRaw);
       setWriteDraft(writeResponse.markdown);
       setWriteProgress(40);
 
@@ -344,17 +359,18 @@ export default function NewPost(): JSX.Element {
       const editPrompt = [
         "Revise this markdown for style consistency and readability.",
         `Voice guidance: ${config.voice?.confirmation ?? ""}`,
-        "Keep citations intact and best-effort for source-derived claims.",
+        "Keep citations intact and best-effort for source-derived claims. Preserve the citationMap JSON string exactly as provided.",
         writeResponse.markdown,
       ].join("\n");
 
-      const editResponse = await client.runJson<WriteResponse>({
+      const editResponseRaw = await client.runJson<WriteResponseRaw>({
         prompt: editPrompt,
         schema: writeSchema,
         schemaName: "new_post_write_cycle_2",
         taskType: "important",
         maxRetries: 4,
       });
+      const editResponse = parseWriteResponse(editResponseRaw);
       setEditedDraft(editResponse.markdown);
       setWriteProgress(70);
 
@@ -368,22 +384,27 @@ export default function NewPost(): JSX.Element {
 
       setWriteCycle("guardrails");
       const guardrailsPrompt = [
-        "Apply guardrails to this markdown and fix any violations.",
+        "Apply guardrails to this markdown and fix any violations. Preserve the citationMap JSON string exactly as provided.",
         "Only use the guardrails text and the post draft.",
         `Guardrails: ${config.guardrails?.confirmation ?? ""}`,
         editResponse.markdown,
       ].join("\n");
 
-      const guardrailsResponse = await client.runJson<WriteResponse>({
+      const guardrailsResponseRaw = await client.runJson<WriteResponseRaw>({
         prompt: guardrailsPrompt,
         schema: writeSchema,
         schemaName: "new_post_write_cycle_3",
         taskType: "important",
         maxRetries: 4,
       });
+      const guardrailsResponse = parseWriteResponse(guardrailsResponseRaw);
 
       setGuardrailedDraft(guardrailsResponse.markdown);
-      setCitationMap(guardrailsResponse.citationMap);
+      setCitationMap(
+        Object.keys(guardrailsResponse.citationMap).length > 0
+          ? guardrailsResponse.citationMap
+          : writeResponse.citationMap,
+      );
       setWriteCycle("done");
       setWriteProgress(100);
       setStep("complete");
